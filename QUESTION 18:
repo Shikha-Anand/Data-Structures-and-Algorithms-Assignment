@@ -1,0 +1,63 @@
+ALGORITHM:
+
+STEP 1: Initialize Variables:
+-> max_prod: Stores the maximum product up to the current index.
+-> min_prod: Stores the minimum product up to the current index (since negative numbers can turn 
+a minimum product into a maximum product when multiplied by a negative number).
+-> result: Keeps track of the maximum product found so far.
+
+STEP 2: Traverse the Array:
+->For each number in the array, calculate the new max_prod and min_prod considering three possibilities:
+   1-The current number itself.
+   2-The product of the current number and the previous max_prod.
+   3-The product of the current number and the previous min_prod.
+
+-> Update max_prod and min_prod accordingly.
+-> Update the result to hold the maximum value between the current result and max_prod.
+
+STEP 3: Return the Result:
+-> After the loop, result will hold the maximum product of any subarray.
+
+
+PROGRAM:
+public class MaximumProductSubarray {
+    public static int maxProduct(int[] nums) {
+        int n = nums.length;
+        if (n == 0) return 0;
+
+        int max_prod = nums[0];
+        int min_prod = nums[0];
+        int result = nums[0];
+
+        for (int i = 1; i < n; i++) {
+            
+            if (nums[i] < 0) {
+                int temp = max_prod;
+                max_prod = min_prod;
+                min_prod = temp;
+            }
+
+      
+            max_prod = Math.max(nums[i], max_prod * nums[i]);
+            min_prod = Math.min(nums[i], min_prod * nums[i]);
+
+            
+            result = Math.max(result, max_prod);
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {2, 3, -2, 4};
+        System.out.println("Maximum product subarray: " + maxProduct(nums));  
+    }
+}
+
+OUTPUT:
+Maximum product subarray:6
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+
