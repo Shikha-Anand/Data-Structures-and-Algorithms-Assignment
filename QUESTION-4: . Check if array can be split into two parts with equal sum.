@@ -1,0 +1,59 @@
+ALGORITHM:
+Step 1-Loop through each index i from 0 to n-2.
+Step 2-For each index i, calculate:
+Step 3-Sum of prefix (from index 0 to i)
+Step 4-Sum of suffix (from index i+1 to n-1)
+Step 5-If both sums are equal, return true.
+Step 6-If no such index found, return false.
+
+PROGRAM:
+public class SplitArrayEqualSum {
+    public static boolean canBeSplit(int[] arr) {
+        int n = arr.length;
+
+        for (int i = 0; i < n - 1; i++) {
+            int leftSum = 0;
+            int rightSum = 0;
+
+            for (int j = 0; j <= i; j++) {
+                leftSum += arr[j];
+            }
+
+            for (int j = i + 1; j < n; j++) {
+                rightSum += arr[j];
+            }
+
+         
+            if (leftSum == rightSum) {
+                return true;
+            }
+        }
+
+       
+        return false;
+    }
+
+
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 3};
+        boolean result = canBeSplit(arr);
+
+        if (result) {
+            System.out.println("Array can be split into two parts with equal sum.");
+        } else {
+            System.out.println("Array cannot be split into two parts with equal sum.");
+        }
+    }
+}
+
+OUTPUT:
+Array cannot be split into two parts with equal sum.
+
+TIME AND SPACE COMPLEXITY:
+
+Time Complexity: O(n²)
+Space Complexity: O(1)
+
+
+
+
