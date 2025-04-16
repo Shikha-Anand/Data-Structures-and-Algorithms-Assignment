@@ -1,0 +1,58 @@
+ALGORITHM:
+
+STEP 1: Initialize a variable maxLength = 0.
+
+STEP 2: Loop through the string using a starting index i from 0 to n-1.
+
+STEP 3: For each i, create a substring starting from i and check characters one by one:
+-> Store characters in a set or check manually.
+-> If a repeating character is found, break.
+-> If not, update maxLength if current length is greater.
+
+STEP 4: Return maxLength.
+
+PROGRAM:
+
+public class LongestUniqueSubstring {
+    public static int longestUniqueSubstring(String str) {
+        int n = str.length();
+        int maxLength = 0;
+
+        for (int i = 0; i < n; i++) {
+            boolean[] visited = new boolean[256];
+            int currentLength = 0;
+
+          
+            for (int j = i; j < n; j++) {
+                char ch = str.charAt(j);
+
+
+                if (visited[ch]) {
+                    break;
+                } else {
+                    visited[ch] = true;
+                    currentLength++;
+                }
+            }
+
+          
+            if (currentLength > maxLength) {
+                maxLength = currentLength;
+            }
+        }
+
+        return maxLength;
+    }
+
+    public static void main(String[] args) {
+        String input = "abcabcbb";
+        int result = longestUniqueSubstring(input);
+        System.out.println("Length of the longest substring without repeating characters: " + result);
+    }
+}
+
+OUTPUT:
+Length of the longest substring without repeating characters: 3
+
+TIME COMPLEXITY: O(N^2)
+SPACE COMPLEXITY: O(1)
