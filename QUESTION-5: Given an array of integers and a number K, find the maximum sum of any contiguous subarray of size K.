@@ -1,0 +1,62 @@
+ALGORITHM:
+
+STEP 1: Initialize a variable maxSum with the smallest possible value (e.g., Integer.MIN_VALUE).
+STEP 2: Loop through the array from index 0 to n - k.
+STEP 3: For each index, calculate the sum of the next k elements.
+STEP 4: Compare it with maxSum and update if the current sum is greater.
+STEP 5:After the loop, return maxSum.
+
+PROGRAM:
+
+public class MaxSubarraySum {
+    public static int maxSumSubarray(int[] arr, int k) {
+        int n = arr.length;
+        if (k > n) {
+            return -1;
+        }
+
+        int maxSum = Integer.MIN_VALUE;
+
+        for (int i = 0; i <= n - k; i++) {
+            int currentSum = 0;
+
+            for (int j = i; j < i + k; j++) {
+                currentSum += arr[j];
+            }
+
+            // Update maxSum if currentSum is greater
+            if (currentSum > maxSum) {
+                maxSum = currentSum;
+            }
+        }
+
+        return maxSum;
+    }
+
+  
+    public static void main(String[] args) {
+        // Sample input
+        int[] arr = {1, 4, 2, 10, 23, 3, 1, 0, 20};
+        int k = 4;
+
+      
+        int result = maxSumSubarray(arr, k);
+
+       
+        if (result != -1) {
+            System.out.println("Maximum sum of subarray of size " + k + " is: " + result);
+        } else {
+            System.out.println("Subarray of size " + k + " cannot be formed.");
+        }
+    }
+}
+
+OUTPUT:
+Maximum sum of subarray of size 4 is: 39
+
+TIME COMPLEXITY:
+ Time Complexity = O(n × k)
+
+SPACE COMPLEXITY:
+ O(1)
+
