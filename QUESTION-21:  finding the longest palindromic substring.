@@ -1,0 +1,53 @@
+ALGORITHM:
+
+Step 1: Start with all possible substrings of the string.
+Step 2: For each substring, check if it's a palindrome.
+Step 3:Keep track of the longest one you find.
+
+PROGRAM:
+public class LongestPalindrome {
+    public static boolean isPalindrome(String s) {
+        int start = 0;
+        int end = s.length() - 1;
+
+        while (start < end) {
+            if (s.charAt(start) != s.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+
+    public static String longestPalindrome(String str) {
+        String longest = "";
+
+  
+        for (int i = 0; i < str.length(); i++) {
+            for (int j = i + 1; j <= str.length(); j++) {
+                String sub = str.substring(i, j);
+                if (isPalindrome(sub) && sub.length() > longest.length()) {
+                    longest = sub;
+                }
+            }
+        }
+
+        return longest;
+    }
+
+    public static void main(String[] args) {
+        String str = "babad";
+        String result = longestPalindrome(str);
+        System.out.println("Longest palindromic substring is: " + result);
+    }
+}
+
+OUTPUT:
+Longest palindromic substring is: bab
+
+Time Complexity: O(n³)
+
+Space Complexity: O(1)
+
+
